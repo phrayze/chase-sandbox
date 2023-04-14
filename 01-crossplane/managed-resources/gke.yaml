@@ -1,0 +1,16 @@
+apiVersion: container.gcp.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gke/v1beta1/backupbackupplan
+  labels:
+    testing.upbound.io/example-name: primary-cluster
+  name: primary-cluster
+spec:
+  forProvider:
+    addonsConfig:
+      - gkeBackupAgentConfig:
+          - enabled: false
+    initialNodeCount: 1
+    location: us-central1
+    removeDefaultNodePool: false
