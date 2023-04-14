@@ -1,0 +1,56 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/demoinstance
+  labels:
+    testing.upbound.io/example-name: demo-instance
+  name: crossplane-demo-instance
+spec:
+  forProvider:
+    bootDisk:
+      - initializeParams:
+          - image: debian-cloud/debian-11
+    machineType: e2-medium
+    networkInterface:
+      - network: default
+    zone: us-central1-a
+
+
+# ---
+
+# apiVersion: compute.gcp.upbound.io/v1beta1
+# kind: Instance
+# metadata:
+#   annotations:
+#     meta.upbound.io/example-id: networkconnectivity/v1beta1/spoke
+#   labels:
+#     testing.upbound.io/example-name: instance
+#   name: crossplace-demo-vm
+# spec:
+#   forProvider:
+#     bootDisk:
+#       - initializeParams:
+#           - image: centos-7
+#           # - imageSelector:
+#           #     matchLabels:
+#           #       testing.upbound.io/example-name: image
+#     canIpForward: true
+#     machineType: e2-medium
+#     networkInterface:
+#       networkRef: 
+#         name: jpmc-demo
+#       subnetwork: 
+#         name: subnet-1
+#     # networkInterface:
+#     #   - accessConfig:
+#     #       - {}
+#     #     networkSelector:
+#     #       matchLabels:
+#     #         testing.upbound.io/example-name: jpmc-demo
+#     #     subnetworkSelector:
+#     #       matchLabels:
+#     #         testing.upbound.io/example-name: subnet-1
+#     zone: us-central1-c
+#   providerConfigRef:
+#     name: default
