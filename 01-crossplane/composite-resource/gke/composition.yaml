@@ -1,0 +1,37 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: cp-gke-demo
+spec:
+  compositeTypeRef:
+    apiVersion: gke-demo-api.example.org/v1alpha1
+    kind: XGke
+  resources:
+    - name: cp-gke-cluster
+      base:
+        apiVersion: container.gcp.upbound.io/v1beta1
+        kind: Cluster
+        metadata:
+          annotations:
+            meta.upbound.io/example-id: gke/v1beta1/backupbackupplan
+          labels:
+            testing.upbound.io/example-name: primary-cluster
+          name: primary-cluster
+          spec:
+            forProvider:
+              addonsConfig:
+                - gkeBackupAgentConfig:
+                    - enabled: false
+              initialNodeCount: 1
+              location: us-central1
+              removeDefaultNodePool: false
+      patches:
+        - fromFieldPath: "spec.location"
+          toFieldPath: "spec.forProvider.location"
+          transforms:
+            - type: map
+              map: 
+                EU: "europe-central2"
+                US: "us-central1"
+        - fromFieldPath: "spec.initialNodeCount"
+          toFieldPath: "spec.forProvider.initialNodeCount"
