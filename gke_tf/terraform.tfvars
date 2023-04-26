@@ -1,0 +1,9 @@
+cluster_name           = "xpcp-cluster-pocrr"
+location               = "us-central1"
+project_id             = "chaseio-dev"
+subnetwork             = "default"
+node_pool_name         = "xp-cluster-node-pool-1"
+node_locations         = ["us-central1-a"]
+worker_nodes_count     = "1"
+worker_nodes_disk_size = "10"
+worker_node_type       = "n1-standard-1"
