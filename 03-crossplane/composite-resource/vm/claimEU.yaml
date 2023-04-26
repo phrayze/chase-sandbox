@@ -1,0 +1,7 @@
+apiVersion: gce-api.example.org/v1alpha1
+kind: XGce
+metadata:
+  name: claim-eu-gce
+  namespace: cp-gce
+spec: 
+  zone: "EU"
