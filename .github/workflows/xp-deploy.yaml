@@ -1,7 +1,6 @@
 
 name: "GKE in actions"
 
-
 on:
   push:
     paths:
@@ -63,9 +62,9 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: xpcp-cluster-pocrr
+          cluster_name: xpcp-cluster-poc3
           location: us-central1
-          project_id: chaseio-dev
+          project_id: team-alpha-dev
       
       - id: get-pods
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
@@ -82,7 +81,40 @@ jobs:
         run: |
           helm repo add argo https://argoproj.github.io/argo-helm
           helm install argocd argo/argo-cd --namespace argo-ns --create-namespace
-          
+
+      - id: get-argo-ns
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+        run: kubectl get pods -A
+
       - id: get-pods-after-bootstrap
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: kubectl get pods -A
+
+#testing patch
+
+
+  patch-argo:
+    name: patch-argo
+    runs-on: ubuntu-latest
+    needs: bootstrap
+    steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SECRET_GCP }}'
+
+      - id: get-credentials
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: xpcp-cluster-poc3
+          location: us-central1
+          project_id: team-alpha-dev
+      
+      - id: get-pods
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         run: kubectl get pods -A 
+        
+      - id: patch-LB
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
+        run: kubectl patch svc argocd-server -n argo-ns -p '{"spec":{"type":"LoadBalancer"}}'
