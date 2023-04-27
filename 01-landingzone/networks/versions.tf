@@ -29,7 +29,7 @@ terraform {
 
 
 
-provider "google" {
-  project = var.project_id
-  region  = var.location
-}
+# provider "google" {
+#   project = var.project_id
+#   region  = var.location
+# }

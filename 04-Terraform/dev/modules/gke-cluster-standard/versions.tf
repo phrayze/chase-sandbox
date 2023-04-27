@@ -20,16 +20,12 @@ terraform {
       source  = "hashicorp/google"
       version = ">= 4.60.0" # tftest
     }
-    # google-beta = {
-    #   source  = "hashicorp/google-beta"
-    #   version = ">= 4.60.0" # tftest
-    # }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = ">= 4.60.0" # tftest
+    }
   }
 }
 
 
 
-provider "google" {
-  project = var.project_id
-  region  = var.location
-}

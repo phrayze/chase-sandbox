@@ -8,11 +8,11 @@ variable "subnet_name_01" {
   type        = string
   default     = "subnet01"
 }
-# variable "subnet_name_02" {
-#   description = "Subnet2 name"
-#   type        = string
-#   default = "subnet02"
-# }
+variable "subnet_name_02" {
+  description = "Subnet2 name"
+  type        = string
+  default = "subnet02"
+}
 
 variable "project_id" {
   description = "Cluster project id."
