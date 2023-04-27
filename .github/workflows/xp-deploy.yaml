@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        working-directory: [gke_tf]
+        working-directory: [./01-landingzone/networks, ./01-landingzone/dev]
     defaults:
       run:
         working-directory: ${{ matrix.working-directory }}
@@ -62,8 +62,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: xpcp-cluster-poc3
-          location: us-central1
+          cluster_name: poc-cluster-dev
+          location: us-central1-a
           project_id: team-alpha-dev
       
       - id: get-pods
@@ -107,8 +107,8 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: xpcp-cluster-poc3
-          location: us-central1
+          cluster_name: poc-cluster-dev
+          location: us-central1-a
           project_id: team-alpha-dev
       
       - id: get-pods
