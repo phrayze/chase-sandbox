@@ -1,0 +1,36 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: cp-gce-demo
+spec:
+  compositeTypeRef:
+    apiVersion: gce-api.example.org/v1alpha1
+    kind: XGce
+  resources:
+    - name: cp-gce
+      base:
+        apiVersion: compute.gcp.upbound.io/v1beta1
+        kind: Instance
+        metadata:
+          annotations:
+            meta.upbound.io/example-id: compute/v1beta1/demoinstance
+          abels:
+            testing.upbound.io/example-name: demo-instance
+        name: cp-vm
+        spec:
+          forProvider:
+            bootDisk:
+              - initializeParams:
+                  - image: debian-cloud/debian-11
+            machineType: e2-medium
+            networkInterface:
+              - network: default
+            zone: us-central1-a
+      patches:
+        - fromFieldPath: "spec.zone"
+          toFieldPath: "spec.forProvider.zone"
+          transforms:
+            - type: map
+              map: 
+                EU: "europe-west1-b"
+                US: "us-central1-a"

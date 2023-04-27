@@ -1,0 +1,7 @@
+apiVersion: gce-api.example.org/v1alpha1
+kind: XGce
+metadata:
+  name: gce-composite-resource
+spec: 
+#   location: ""
+  zone: "us-central1-a"
