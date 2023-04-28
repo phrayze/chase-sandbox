@@ -3,12 +3,12 @@ variable "mgmt_network_name" {
   type    = string
 }
 
-variable "mgmt_subnet_name_01" {
+variable "mgmt_subnet_01_name" {
   description = "Subnet1 name"
   type        = string
   default     = "subnet01"
 }
-variable "mgmt_subnet_name_02" {
+variable "mgmt_subnet_02_name" {
   description = "Subnet2 name"
   type        = string
   default     = "subnet02"
