@@ -15,10 +15,6 @@ module "gke" {
   #   module.vpc
   # ]
 
-  config_connector_config {
-    enabled = true
-  }
-
 }
 
 module "project-services" {
