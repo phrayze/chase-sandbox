@@ -17,7 +17,7 @@ variable "subnet_name_02" {
 variable "project_id" {
   description = "Cluster project id."
   type        = string
-  default     = "chaseio-dev"
+  default     = "team-alpha-dev"
 }
 
 variable "remote_state_bucket" {
