@@ -18,4 +18,38 @@ module "gke" {
   config_connector_config {
     enabled = true
   }
+
+}
+
+module "project-services" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "~> 14.2"
+
+  project_id                  = var.project_id
+
+  activate_apis = [
+    "anthos.googleapis.com",
+    "anthosconfigmanagement.googleapis.com",
+  ]
+}
+resource "google_gke_hub_feature" "configmanagement_acm_feature" {
+  name     = "configmanagement"
+  location = "global"
+  provider = google-beta
+}
+
+resource "google_gke_hub_feature_membership" "feature_member" {
+  provider   = google-beta
+  location   = "global"
+  feature    = "configmanagement"
+  membership = google_gke_hub_membership.membership.membership_id
+  configmanagement {
+    version = "1.14.3"
+
+    policy_controller {
+      enabled                    = true
+      template_library_installed = true
+      referential_rules_enabled  = true
+    }
+  }
 }
