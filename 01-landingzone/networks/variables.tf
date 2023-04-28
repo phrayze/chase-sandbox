@@ -1,23 +1,23 @@
-variable "network_name" {
+variable "mgmt_network_name" {
   default = "poc-network"
   type    = string
 }
 
-variable "subnet_name_01" {
+variable "mgmt_subnet_name_01" {
   description = "Subnet1 name"
   type        = string
   default     = "subnet01"
 }
-variable "subnet_name_02" {
+variable "mgmt_subnet_name_02" {
   description = "Subnet2 name"
   type        = string
   default     = "subnet02"
 }
 
-variable "project_id" {
+variable "mgmt_project_id" {
   description = "Cluster project id."
   type        = string
-  default     = "chaseio-dev"
+  default     = "team-alpha-mgmt"
 }
 
 variable "remote_state_bucket" {
@@ -31,7 +31,7 @@ variable "remote_state_bucket" {
 variable "cluster_name" {
   description = "Cluster Name."
   type        = string
-  default     = "chaseio-dev-cluster"
+  default     = "team-alpha-lz-cluster"
 }
 */
 
