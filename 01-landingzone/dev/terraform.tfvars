@@ -1,5 +1,5 @@
 remote_state_bucket = "bkt-b-tfstate-xp"
-cluster_name           = "poc-cluster-dev"
+cluster_name           = "poc-cluster-dev-2"
 location               = "us-central1-a"
 project_id             = "team-alpha-mgmt"
 network_name         = "poc-network" #subnet01
