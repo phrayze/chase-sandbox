@@ -3,7 +3,7 @@
 module "vpc" {
   source          = "../modules/vpc"
   project_id      = "chaseio-dev"
-  network_name    = "chase-network"
+  network_name    = "poc-network"
   subnet_name_01  = "subnet01"
   subnet_name_02  = "subnet02"
 }
@@ -32,7 +32,7 @@ module "cluster-1" {
   name       = "chaseio-dev-cluster"
   location   = "us-central1-b"
   vpc_config = {
-    network    = "chase-network"     # var.vpc.self_link
+    network    = "poc-network"     # var.vpc.self_link
     subnetwork = "subnet01"          # var.subnet.self_link
     secondary_range_names = {
       pods     = "pods"
