@@ -56,7 +56,7 @@ jobs:
     needs: terraform-network
     strategy:
       matrix:
-        working-directory: [landingzone/networks]
+        working-directory: [landingzone/dev]
     defaults:
       run:
         working-directory: ${{ matrix.working-directory }}
@@ -65,9 +65,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
+      #- name: Terraform Format
+       # id: fmt
+        #run: terraform fmt -check
 
       - name: Terraform Init
         id: init

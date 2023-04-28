@@ -2,7 +2,7 @@
 
 module "vpc" {
   source         = "../modules/vpc"
-  project_id     = "chaseio-dev"
+  project_id     = "team-alpha-dev"
   network_name   = "poc-network"
   subnet_name_01 = "subnet01"
   subnet_name_02 = "subnet02"
