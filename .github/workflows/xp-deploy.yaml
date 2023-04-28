@@ -56,7 +56,7 @@ jobs:
     needs: terraform-network
     strategy:
       matrix:
-        working-directory: [landingzone/networks]
+        working-directory: [landingzone/dev]
     defaults:
       run:
         working-directory: ${{ matrix.working-directory }}
