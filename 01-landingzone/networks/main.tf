@@ -8,33 +8,6 @@ module "vpc" {
   subnet_name_02 = var.mgmt_subnet_02_name
 }
 
-resource "google_project_services" "mgmt-project" {
-  project  = var.mgmt_project_id
-  services = ["anthos.googleapis.com", "anthosconfigmanagement.googleapis.com"]
-}
-
-resource "google_gke_hub_feature" "configmanagement_acm_feature" {
-  name     = "configmanagement"
-  location = "global"
-  provider = google-beta
-}
-
-resource "google_gke_hub_feature_membership" "feature_member" {
-  provider   = google-beta
-  location   = "global"
-  feature    = "configmanagement"
-  membership = google_gke_hub_membership.membership.membership_id
-  configmanagement {
-    version = "1.14.3"
-
-    policy_controller {
-      enabled                    = true
-      template_library_installed = true
-      referential_rules_enabled  = true
-    }
-  }
-}
-
 # module "gke" {
 #   source          = "../modules/gke"
 #   cluster_name    = "xpcp-cluster-poc"
