@@ -3,7 +3,7 @@ module "gke" {
   source          = "../modules/gke"
   cluster_name    = "poc-cluster-dev"
   location        = "us-central1-a"
-  project_id      = "chaseio-dev"
+  project_id      = "team-alpha-mgmt"
   network_name    = "poc-network" 
   subnet_name_01  = "subnet01" 
   node_pool_name  = "xp-cluster-node-pool-1"
