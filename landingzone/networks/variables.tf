@@ -1,6 +1,6 @@
-variable "network_name" {
-    default = "poc-network"
-    type    = string
+/*variable "network_name" {
+  default = "poc-network"
+  type    = string
 }
 
 variable "subnet_name_01" {
@@ -11,8 +11,9 @@ variable "subnet_name_01" {
 variable "subnet_name_02" {
   description = "Subnet2 name"
   type        = string
-  default = "subnet02"
+  default     = "subnet02"
 }
+*/
 
 variable "project_id" {
   description = "Cluster project id."
@@ -27,11 +28,13 @@ variable "remote_state_bucket" {
 
 #######
 
+/*
 variable "cluster_name" {
   description = "Cluster Name."
   type        = string
   default     = "chaseio-dev-cluster"
 }
+*/
 
 variable "location" {
   description = "Cluster Location."
@@ -39,7 +42,7 @@ variable "location" {
   default     = "us-central1-a"
 }
 
-variable "node_pool_name" {
+/*variable "node_pool_name" {
   description = "Cluster Node Pool Name."
   type        = string
   default     = "node-pool-1"
@@ -47,7 +50,7 @@ variable "node_pool_name" {
 
 variable "node_locations" {
   description = "Nodes Location."
-  type = list(any)
+  type        = list(any)
 }
 
 variable "worker_nodes_count" {
@@ -64,3 +67,4 @@ variable "worker_node_type" {
   type        = string
   default     = "n1-standard-1"
 }
+*/
