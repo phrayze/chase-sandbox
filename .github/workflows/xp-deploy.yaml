@@ -4,7 +4,7 @@ name: "GKE in actions"
 on:
   push:
     paths:
-    - 'gke_tf/**'
+    - '01-landingzone/**'
     branches:
       - main
   pull_request:
