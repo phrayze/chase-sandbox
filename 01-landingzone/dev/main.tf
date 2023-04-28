@@ -1,7 +1,7 @@
 #### Module for provisioning Cusotm VPC with 2 Subnets
 module "gke" {
   source          = "../modules/gke"
-  cluster_name    = "poc-cluster-dev"
+  cluster_name    = "poc-cluster-de-2"
   location        = "us-central1-a"
   project_id      = "team-alpha-mgmt"
   network_name    = "poc-network" 
