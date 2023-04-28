@@ -129,7 +129,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: poc-cluster-dev-2
+          cluster_name: poc-cluster-dev
           location: us-central1-a
           project_id: team-alpha-mgmt
       
@@ -184,7 +184,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' 
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: poc-cluster-dev-2
+          cluster_name: poc-cluster-dev
           location: us-central1-a
           project_id: team-alpha-mgmt
       
