@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        working-directory: [./01-landingzone/networks, ./01-landingzone/dev]
+        working-directory: [01-landingzone/networks]
     defaults:
       run:
         working-directory: ${{ matrix.working-directory }}
