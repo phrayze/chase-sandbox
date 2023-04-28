@@ -1,14 +1,3 @@
-#### Module for provisioning Cusotm VPC with 2 Subnets
-
-module "vpc" {
-  source          = "../modules/vpc"
-  project_id      = "chaseio-dev"
-  network_name    = "poc-network"
-  subnet_name_01  = "subnet01"
-  subnet_name_02  = "subnet02"
-}
-
-
 #### Module for provisioning GKE Standard CLuster based on Cloud Fabric
 
 
@@ -26,7 +15,7 @@ module "vpc" {
 
 
 
-module "cluster-1" {
+module "temp-cluster-bhavi" {
   source     = "../modules/gke-cluster-standard"
   project_id = "chaseio-dev"
   name       = "chaseio-dev-cluster"
