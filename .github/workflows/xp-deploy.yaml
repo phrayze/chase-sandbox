@@ -4,7 +4,7 @@ name: "GKE in actions"
 on:
   push:
     paths:
-    - '01-landingzone/**'
+    - 'landingzone/**'
     branches:
       - main
   pull_request:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        working-directory: [01-landingzone/networks]
+        working-directory: [./landingzone/networks]
     defaults:
       run:
         working-directory: ${{ matrix.working-directory }}
