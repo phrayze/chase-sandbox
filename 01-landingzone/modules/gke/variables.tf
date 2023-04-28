@@ -1,6 +1,6 @@
 variable "network_name" {
-    #default = "poc-network"
-    type    = string
+  #default = "poc-network"
+  type = string
 }
 
 variable "subnet_name_01" {
@@ -11,7 +11,7 @@ variable "subnet_name_01" {
 variable "subnet_name_02" {
   description = "Subnet2 name"
   type        = string
-  default = "subnet02"
+  default     = "subnet02"
 }
 
 variable "project_id" {
@@ -40,7 +40,7 @@ variable "node_pool_name" {
 
 variable "node_locations" {
   description = "Nodes Location."
-  type = list(any)
+  type        = list(any)
 }
 
 variable "worker_nodes_count" {

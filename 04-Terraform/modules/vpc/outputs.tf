@@ -27,16 +27,16 @@
 # }
 
 output "vpc-network" {
-    description = "vpc-network"
-    value = google_compute_network.vpc-network
+  description = "vpc-network"
+  value       = google_compute_network.vpc-network
 }
 
 output "vpc-subnet01" {
-    description = "subnet01"
-    value = google_compute_subnetwork.subnet01
+  description = "subnet01"
+  value       = google_compute_subnetwork.subnet01
 }
 
 output "vpc-subnet02" {
-    description = "subnet02"
-    value = google_compute_subnetwork.subnet01
+  description = "subnet02"
+  value       = google_compute_subnetwork.subnet01
 }

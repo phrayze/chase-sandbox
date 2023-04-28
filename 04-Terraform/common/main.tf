@@ -1,11 +1,11 @@
 #### Module for provisioning Cusotm VPC with 2 Subnets
 
 module "vpc" {
-  source          = "../modules/vpc"
-  project_id      = var.project_id
-  network_name    = var.network_name
-  subnet_name_01  = var.subnet_name_01
-  subnet_name_02  = var.subnet_name_02
+  source         = "../modules/vpc"
+  project_id     = var.project_id
+  network_name   = var.network_name
+  subnet_name_01 = var.subnet_name_01
+  subnet_name_02 = var.subnet_name_02
 }
 
 

@@ -1,11 +1,11 @@
 #### Module for provisioning Cusotm VPC with 2 Subnets
 
 module "vpc" {
-  source          = "../modules/vpc"
-  project_id      = var.project_id
-  network_name    = var.network_name
-  subnet_name_01  = var.subnet_name_01
-  subnet_name_02  = var.subnet_name_02
+  source         = "../modules/vpc"
+  project_id     = var.project_id
+  network_name   = var.network_name
+  subnet_name_01 = var.subnet_name_01
+  subnet_name_02 = var.subnet_name_02
 }
 
 
@@ -32,8 +32,8 @@ module "cluster-1" {
   name       = var.cluster_name
   location   = module.vpc.subnet01.region
   vpc_config = {
-    network    = module.vpc.vpc-network    # var.vpc.self_link
-    subnetwork = module.subnet01   # var.subnet.self_link
+    network    = module.vpc.vpc-network # var.vpc.self_link
+    subnetwork = module.subnet01        # var.subnet.self_link
     secondary_range_names = {
       pods     = "pods"
       services = "services"
