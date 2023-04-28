@@ -16,7 +16,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "bkt-b-tfstate-ff11"      #Foundations gcs bucket created manually
+    bucket = "bkt-b-tfstate-ff11"      #Foundations gcs bucket created manually in project
     prefix = "terraform/dev/"
   }
 }
