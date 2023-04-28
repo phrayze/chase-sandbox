@@ -1,7 +1,7 @@
 remote_state_bucket = "bkt-b-tfstate-xp"
 #cluster_name           = "poc-cluster-dev"
 location   = "us-central1"
-project_id = "team-alpha-dev"
+project_id = "team-alpha-mgmt"
 #subnet_name_01         = "poc-network" #subnet01 # chase-network
 #node_pool_name         = "xp-cluster-node-pool-1"
 #node_locations         = ["us-central1-a"]
