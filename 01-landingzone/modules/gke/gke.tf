@@ -12,8 +12,10 @@ resource "google_container_cluster" "primary" {
   initial_node_count       = 3
   remove_default_node_pool = true
 
-  config_connector_config {
-    enabled = true
+  addons_config { 
+    config_connector_config {
+      enabled = true
+    }
   }
 }
 

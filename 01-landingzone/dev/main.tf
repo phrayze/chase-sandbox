@@ -28,6 +28,18 @@ module "project-services" {
     "anthosconfigmanagement.googleapis.com",
   ]
 }
+
+resource "google_gke_hub_membership" "membership" {
+  membership_id = "basic"
+  endpoint {
+    gke_cluster {
+      resource_link = module.gke.id
+    }
+  }
+  authority {
+    issuer = "https://container.googleapis.com/v1/${module.gke.id}"
+  }
+}
 resource "google_gke_hub_feature" "configmanagement_acm_feature" {
   name     = "configmanagement"
   location = "global"
