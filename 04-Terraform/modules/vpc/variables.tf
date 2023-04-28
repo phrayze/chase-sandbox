@@ -1,5 +1,5 @@
 variable "network_name" {
-    default = "chase-network"
+    default = "vpc-network"
     type    = string
 }
 
@@ -17,7 +17,7 @@ variable "subnet_name_02" {
 variable "project_id" {
   description = "Cluster project id."
   type        = string
-  default     = "chaseio-dev"
+  default     = "team-alpha-dev"
 }
 
 # variable "remote_state_bucket" {

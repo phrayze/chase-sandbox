@@ -1,4 +1,4 @@
-/*variable "network_name" {
+variable "network_name" {
   default = "poc-network"
   type    = string
 }
@@ -13,7 +13,6 @@ variable "subnet_name_02" {
   type        = string
   default     = "subnet02"
 }
-*/
 
 variable "project_id" {
   description = "Cluster project id."

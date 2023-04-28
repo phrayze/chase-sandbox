@@ -17,7 +17,7 @@ variable "subnet_name_01" {
 variable "project_id" {
   description = "Cluster project id."
   type        = string
-  default     = "chaseio-dev"
+  default     = "team-alpha-mgmt"
 }
 
 variable "remote_state_bucket" {
@@ -30,7 +30,7 @@ variable "remote_state_bucket" {
 variable "cluster_name" {
   description = "Cluster Name."
   type        = string
-  default     = "chaseio-dev-cluster"
+  default     = "team-alpha-lz-cluster"
 }
 
 variable "location" {

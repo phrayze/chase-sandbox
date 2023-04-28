@@ -2,10 +2,10 @@
 
 module "vpc" {
   source          = "../modules/vpc"
-  project_id      = "chaseio-dev"
-  network_name    = "poc-network"
-  subnet_name_01  = "subnet01"
-  subnet_name_02  = "subnet02"
+  project_id      = var.project_id
+  network_name    = var.network_name
+  subnet_name_01  = var.subnet_name_01
+  subnet_name_02  = var.subnet_name_02
 }
 
 
@@ -28,12 +28,12 @@ module "vpc" {
 
 # module "cluster-1" {
 #   source     = "../modules/gke-cluster-standard"
-#   project_id = "chaseio-dev"
-#   name       = "chaseio-dev-cluster"
-#   location   = "us-central1-b"
+#   project_id = var.project_id
+#   name       = var.cluster_name
+#   location   = var.cluster_zone
 #   vpc_config = {
-#     network    = "poc-network"     # var.vpc.self_link
-#     subnetwork = "subnet01"          # var.subnet.self_link
+#     network    = var.vpc.self_link
+#     subnetwork = var.subnet.self_link
 #     secondary_range_names = {
 #       pods     = "pods"
 #       services = "services"
