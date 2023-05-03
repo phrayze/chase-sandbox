@@ -65,7 +65,7 @@ resource "google_gke_hub_feature_membership" "feature_member" {
 resource "google_service_account" "cnrm_system" {
   project                        = var.project_id
   account_id                     = "cnrm_system"
-  display_namoved                = "cnrm-system"
+  display_name                   = "cnrm-system"
 }
 
 resource "google_service_account_iam_member" "kcc-sa" {
