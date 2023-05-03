@@ -20,6 +20,12 @@ variable "project_id" {
   default     = "team-alpha-mgmt"
 }
 
+variable "org_id" {
+  description = "Org. ID"
+  type        = string
+  default     = "722569893449"
+}
+
 variable "remote_state_bucket" {
   description = "remote state bucket name"
   type        = string

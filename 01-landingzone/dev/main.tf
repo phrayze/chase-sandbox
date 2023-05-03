@@ -1,4 +1,4 @@
-#### Module for provisioning Cusotm VPC with 2 Subnets
+#### Module for provisioning Custom VPC with 2 Subnets
 module "gke" {
   source                 = "../modules/gke"
   cluster_name           = "poc-cluster-dev"
@@ -37,7 +37,7 @@ resource "google_gke_hub_membership" "membership" {
     }
   }
   authority {
-    issuer = "https://container.googleapis.com/v1/${module.gke.id}"
+    issuer =  "https://container.googleapis.com/v1/${module.gke.id}"
   }
 }
 resource "google_gke_hub_feature" "configmanagement_acm_feature" {
@@ -60,4 +60,23 @@ resource "google_gke_hub_feature_membership" "feature_member" {
       referential_rules_enabled  = true
     }
   }
+}
+
+resource "google_service_account" "cnrm_system" {
+  project                        = var.project_id
+  account_id                     = "cnrm_system"
+  display_namoved                = "cnrm-system"
+}
+
+resource "google_service_account_iam_member" "kcc-sa" {
+  service_account_id             = google_service_account.cnrm_system.name
+  member                         = "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager]"
+  role                           = "roles/iam.workloadIdentityUser"
+  depends_on                     = google_container_cluster.primary
+}
+
+resource "google_organization_iam_member" "kcc_binding" {
+  org_id                         = var.org_id
+  role                           = "roles/orgpolicy.policyAdmin"
+  member                         = "serviceAccount:${google_service_account.cnrm_system.email}"
 }
