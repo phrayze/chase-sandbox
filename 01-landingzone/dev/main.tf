@@ -64,7 +64,7 @@ resource "google_gke_hub_feature_membership" "feature_member" {
 
 resource "google_service_account" "cnrm_system" {
   project                        = var.project_id
-  account_id                     = "cnrm_system"
+  account_id                     = "cnrm-system"
   display_name                   = "cnrm-system"
 }
 
