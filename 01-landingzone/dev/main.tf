@@ -44,6 +44,7 @@ resource "google_gke_hub_feature" "configmanagement_acm_feature" {
   name     = "configmanagement"
   location = "global"
   provider = google-beta
+  project  = var.project_id
 }
 
 resource "google_gke_hub_feature_membership" "feature_member" {
@@ -72,7 +73,7 @@ resource "google_service_account_iam_member" "kcc-sa" {
   service_account_id             = google_service_account.cnrm_system.name
   member                         = "serviceAccount:${var.project_id}.svc.id.goog[cnrm-system/cnrm-controller-manager]"
   role                           = "roles/iam.workloadIdentityUser"
-  depends_on                     = [google_container_cluster.primary]
+  depends_on                     = [module.gke]  #[google_container_cluster.primary]
 }
 
 resource "google_organization_iam_member" "kcc_binding" {
