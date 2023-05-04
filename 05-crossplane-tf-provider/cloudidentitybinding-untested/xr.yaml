@@ -1,0 +1,10 @@
+apiVersion: gcp.demo.upbound.io/v1alpha1
+kind: FolderIAMMember
+metadata:
+  name: folderiam-mixed
+spec:
+  folderid: "719981868174"
+  memberid: "test-user@chinmay.joonix.net"
+  compositionSelector:
+    matchLabels:
+       implementation: mixed
