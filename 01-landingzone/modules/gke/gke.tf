@@ -11,6 +11,12 @@ resource "google_container_cluster" "primary" {
   subnetwork               = var.subnet_name_01
   initial_node_count       = 3
   remove_default_node_pool = true
+
+  addons_config { 
+    config_connector_config {
+      enabled = true
+    }
+  }
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {

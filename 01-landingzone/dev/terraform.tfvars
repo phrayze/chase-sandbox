@@ -1,9 +1,9 @@
-remote_state_bucket = "bkt-b-tfstate-xp"
-cluster_name           = "poc-cluster-dev"
+remote_state_bucket    = "bkt-b-tfstate-xp"
+cluster_name           = "poc-cluster-dev-2"
 location               = "us-central1-a"
 project_id             = "team-alpha-mgmt"
-network_name         = "poc-network" #subnet01
-subnet_name_01  = "subnet01"
+network_name           = "poc-network" #subnet01
+subnet_name_01         = "subnet01"
 node_pool_name         = "xp-cluster-node-pool-1"
 node_locations         = ["us-central1-a"]
 worker_nodes_count     = "3"
