@@ -1,0 +1,90 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: tf-xfoldersa.gcp.demo.upbound.io
+  labels:
+    provider: gcp
+    implementation: mixed
+spec:
+  compositeTypeRef:
+    apiVersion: gcp.demo.upbound.io/v1alpha1
+    kind: XFoldersa
+  resources:
+    - name: folderiammem
+      base:
+        apiVersion: cloudplatform.gcp.upbound.io/v1beta1
+        kind: FolderIAMMember
+        metadata:
+          annotations:
+            meta.upbound.io/example-id: cloudplatform/v1beta1/folderiammember
+            upjet.upbound.io/manual-intervention: Depends on a valid folder & member
+          labels:
+            testing.upbound.io/example-name: folder-iam-member
+          name: folder-iam-member
+        spec:
+          forProvider:
+            folderid: "719981868174"
+            memberid: "test-user@chinmay.joonix.net"
+            role: roles/viewer    
+      patches:
+        - fromFieldPath: "spec.folderid"
+          toFieldPath: "spec.forProvider.folder"
+        - fromFieldPath: "spec.memberid"
+          toFieldPath: "spec.forProvider.memberid"
+        - type: ToCompositeFieldPath
+          fromFieldPath: spec.forProvider.memberid
+          toFieldPath: status.share.member_id
+    
+    - name: tf-adding-sa-cloudidentity
+      base:
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        spec:
+          forProvider:
+            source: Inline
+            module: |
+              resource "google_cloud_identity_group" "group" {
+                display_name = "my-identity-group"
+
+                parent = "customers/C03s5vs9e"
+
+                group_key {
+                  id = "billing_admins2@chinmay.joonix.net"
+                }
+
+                labels = {
+                  "cloudidentity.googleapis.com/groups.discussion_forum" = ""
+                }
+              }
+
+              resource "google_cloud_identity_group_membership" "cloud_identity_group_membership_basic" {
+                group    = google_cloud_identity_group.group.id
+
+                preferred_member_key {
+                id = var.memberid #"test-user@chinmay.joonix.net"
+                }
+
+                roles {
+                  name = "MEMBER"
+                }
+
+ 
+                }
+
+              output "member_id" {
+                description = "member"
+                type        = string
+                value       = google_cloud_identity_group_membership.cloud_identity_group_membership_basic.preferred_member_key.id
+              }
+              
+              variable "memberid" {
+                description = "VPC name"
+                type        = string
+              } 
+            
+            vars:
+              - key: memberid
+      patches:
+        - fromFieldPath: spec.memberid
+          toFieldPath: spec.forProvider.vars[0].value
+    

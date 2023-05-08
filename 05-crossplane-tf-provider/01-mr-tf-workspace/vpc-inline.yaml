@@ -1,0 +1,26 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: sample-inline-vpc
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      variable "vpcName" { }
+
+      resource "google_compute_network" "custom-test" {
+        name                    = var.vpcName
+        auto_create_subnetworks = false
+      }
+      resource "google_compute_subnetwork" "custom-subnet" {
+        name          = "test-subnetwork"
+        ip_cidr_range = "10.2.0.0/16"
+        region        = "us-central1"
+        network       = google_compute_network.custom-test.id
+      }
+    vars:
+      - key: vpcName
+        value: sample-tf-inline
+  writeConnectionSecretToRef:
+    namespace: default
+    name: terraform-workspace-vpc-inline

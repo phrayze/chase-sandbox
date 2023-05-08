@@ -1,0 +1,24 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: org-policyuniformbla-inline
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      variable "OrgID" { }
+
+      resource "google_organization_policy" "uni_bktlevac_policy" {
+        org_id     = var.OrgID
+        constraint = "storage.uniformBucketLevelAccess"
+
+        boolean_policy {
+          enforced = true
+        }
+      }
+    vars:
+      - key: OrgID
+        value: "648896770364"
+  writeConnectionSecretToRef:
+    namespace: default
+    name: terraform-workspace-uniformbla-inline
