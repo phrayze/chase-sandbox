@@ -1,11 +1,11 @@
 #### Module for provisioning Cusotm VPC with 2 Subnets
 
 module "vpc" {
-  source          = "../modules/vpc"
-  project_id      = "chaseio-dev"
-  network_name    = "poc-network"
-  subnet_name_01  = "subnet01"
-  subnet_name_02  = "subnet02"
+  source         = "../modules/vpc"
+  project_id     = var.project_id
+  network_name   = var.network_name
+  subnet_name_01 = var.subnet_name_01
+  subnet_name_02 = var.subnet_name_02
 }
 
 
@@ -13,7 +13,7 @@ module "vpc" {
 
 
 # locals {
-#   chase_network = data.terraform_remote_state.dev.outputs.network_name
+#   poc_network = data.terraform_remote_state.dev.outputs.network_name
 # }
 
 # data "terraform_remote_state" "dev" {
@@ -28,12 +28,12 @@ module "vpc" {
 
 module "cluster-1" {
   source     = "../modules/gke-cluster-standard"
-  project_id = "chaseio-dev"
-  name       = "chaseio-dev-cluster"
-  location   = "us-central1-b"
+  project_id = var.project_id
+  name       = var.cluster_name
+  location   = module.vpc.subnet01.region
   vpc_config = {
-    network    = "poc-network"     # var.vpc.self_link
-    subnetwork = "subnet01"          # var.subnet.self_link
+    network    = module.vpc.vpc-network # var.vpc.self_link
+    subnetwork = module.subnet01        # var.subnet.self_link
     secondary_range_names = {
       pods     = "pods"
       services = "services"
@@ -60,9 +60,9 @@ module "cluster-1" {
 
 module "cluster-1-nodepool-1" {
   source       = "../modules/gke-nodepool"
-  project_id   = "chaseio-dev"
-  cluster_name = "chaseio-dev-cluster"
-  location     = "us-central1-b"
+  project_id   = var.project_id
+  cluster_name = var.cluster_name
+  location     = var.cluster_zone
   name         = "nodepool-1"
   labels       = { environment = "dev" }
   service_account = {
