@@ -1,0 +1,9 @@
+apiVersion: gcp.demo.upbound.io/v1alpha1
+kind: XOrgpolicy
+metadata:
+  name: org-policy-skipsubnet-domainrestriction
+spec:
+  orgid: "555271503501"
+  compositionSelector:
+    matchLabels:
+       implementation: terraform
