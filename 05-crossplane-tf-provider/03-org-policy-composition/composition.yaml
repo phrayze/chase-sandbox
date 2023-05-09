@@ -1,0 +1,63 @@
+##### Organization Policies #########################
+# Implementes "Skip Default Network Creation" Organisation Policy 
+# when creating a  new Project
+# Required Service Account Role is
+# "Organization Policy Administrator(roles/orgpolicy.policyAdmin)" at Organisation level
+##
+# Implementes "Domain Restricted Sharing" Organisation Policy 
+# By default, all user identities are allowed to be added to IAM policies. 
+# Only allowed values can be defined in this constraint, denied values are not supported.
+# Required Service Account Role is
+# "Organization Policy Administrator(roles/orgpolicy.policyAdmin)" at Organisation level
+#####################################################
+
+
+
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: tf-xorgpolicy.gcp.demo.upbound.io
+  labels:
+    provider: gcp
+    implementation: terraform
+spec:
+  compositeTypeRef:
+    apiVersion: gcp.demo.upbound.io/v1alpha1
+    kind: XOrgpolicy
+  resources:
+    - name: tf-org-policy
+      base:
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        spec:
+          forProvider:
+            source: Inline
+            module: |
+              variable "orgid" {
+              }
+
+              resource "google_organization_policy" "skip_network" {
+                org_id     = var.orgid
+                constraint = "compute.skipDefaultNetworkCreation"
+
+                boolean_policy {
+                  enforced = true
+                }
+              }
+
+              resource "google_organization_policy" "domain_restricted_sharing" {
+                org_id     = var.orgid
+                constraint = "iam.allowedPolicyMemberDomains"
+
+                list_policy {
+                  allow { 
+                    all = true
+                  }
+                }
+              }
+
+            vars:
+              - key: orgid
+      patches:
+        - fromFieldPath: spec.orgid
+          toFieldPath: spec.forProvider.vars[0].value

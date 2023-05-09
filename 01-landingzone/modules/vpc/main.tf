@@ -5,14 +5,14 @@ resource "google_compute_subnetwork" "Subnet01" {
   project       = var.project_id
   network       = google_compute_network.chase-network.id
   secondary_ip_range = [
-  {
-    range_name    = "pods"
-    ip_cidr_range = "192.168.0.0/24"
-  },
-  {
-    range_name    = "services"
-    ip_cidr_range = "192.168.1.0/24"
-  }
+    {
+      range_name    = "pods"
+      ip_cidr_range = "192.168.0.0/24"
+    },
+    {
+      range_name    = "services"
+      ip_cidr_range = "192.168.1.0/24"
+    }
   ]
 }
 

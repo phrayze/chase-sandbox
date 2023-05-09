@@ -1,0 +1,42 @@
+##### Organization Policies #########################
+# Implementes "Domain Restricted Sharing" Organisation Policy 
+# By default, all user identities are allowed to be added to IAM policies. 
+# Only allowed values can be defined in this constraint, denied values are not supported.
+# Required Service Account Role is
+# "Organization Policy Administrator(roles/orgpolicy.policyAdmin)" at Organisation level
+#####################################################
+
+
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: org-policy-domain-restricted
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      variable "orgid" {
+      }
+      
+      resource "google_organization_policy" "domain_restricted_sharing" {
+        org_id     = var.orgid
+        constraint = "iam.allowedPolicyMemberDomains"
+
+        list_policy {
+          allow { 
+            all = true
+          }
+        }
+      }
+    
+    vars:
+      - key: orgid
+        value: "555271503501"
+
+
+# Specify the List fo Domains Customer ID's which can be allowed to be added to IAM
+# Example below
+        # list_policy {
+        #   allow { 
+        #     values = ["C01moe40l"]
+        #   }

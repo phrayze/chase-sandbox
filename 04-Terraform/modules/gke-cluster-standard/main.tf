@@ -58,16 +58,16 @@ resource "google_container_cluster" "cluster" {
       enabled = var.enable_addons.dns_cache
     }
     http_load_balancing {
-      disabled = !var.enable_addons.http_load_balancing
+      disabled = ! var.enable_addons.http_load_balancing
     }
     horizontal_pod_autoscaling {
-      disabled = !var.enable_addons.horizontal_pod_autoscaling
+      disabled = ! var.enable_addons.horizontal_pod_autoscaling
     }
     network_policy_config {
-      disabled = !var.enable_addons.network_policy
+      disabled = ! var.enable_addons.network_policy
     }
     cloudrun_config {
-      disabled = !var.enable_addons.cloudrun
+      disabled = ! var.enable_addons.cloudrun
     }
     istio_config {
       disabled = var.enable_addons.istio == null
@@ -269,7 +269,7 @@ resource "google_container_cluster" "cluster" {
   # dataplane v2 has bult-in network policies
   dynamic "network_policy" {
     for_each = (
-      var.enable_addons.network_policy && !var.enable_features.dataplane_v2
+      var.enable_addons.network_policy && ! var.enable_features.dataplane_v2
       ? [""]
       : []
     )

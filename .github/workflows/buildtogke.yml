@@ -12,9 +12,9 @@
 
 name: Build and Deploy to GKE
 
-on:
-  push:
-    branches: [ "main" ]
+on: [workflow_dispatch]
+  # push:
+  #   branches: [ "main" ]
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -45,8 +45,8 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         token_format: 'access_token'
-        workload_identity_provider: 'projects/1052324857337/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'azt-sa-1@azt-dev.iam.gserviceaccount.com'
+        workload_identity_provider: 'projects/244319587013/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'my-service-account@azt-dev.iam.gserviceaccount.com'
 
     # Alternative option - authentication via credentials json
     # - id: 'auth'
