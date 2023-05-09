@@ -1,0 +1,24 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: org-oslogin-inline
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      variable "OrgID" { }
+
+      resource "google_organization_policy" "require_oslogin_policy" {
+        org_id     = var.OrgID
+        constraint = "compute.requireOsLogin"
+
+        boolean_policy {
+          enforced = true
+        }
+      }
+    vars:
+      - key: OrgID
+        value: "648896770364"
+  writeConnectionSecretToRef:
+    namespace: default
+    name: terraform-workspace-oslogin-inline
