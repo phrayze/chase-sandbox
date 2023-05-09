@@ -56,6 +56,24 @@ spec:
                 }
               }
 
+              resource "google_organization_policy" "uni_bktlevac_policy" {
+                org_id     = var.OrgID
+                constraint = "storage.uniformBucketLevelAccess"
+
+                boolean_policy {
+                  enforced = true
+                }
+              }
+
+              resource "google_organization_policy" "uni_bktlevac_policy" {
+                org_id     = var.OrgID
+                constraint = "compute.requireOsLogin"
+
+                boolean_policy {
+                  enforced = true
+                }
+              }
+
             vars:
               - key: orgid
       patches:
