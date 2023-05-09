@@ -1,0 +1,30 @@
+##### Organization Policies #########################
+# Implementes "Skip Default Network Creation" Organisation Policy 
+# when creating a  new Project
+# Required Service Account Role is
+# "Organization Policy Administrator(roles/orgpolicy.policyAdmin)" at Organisation level
+#####################################################
+
+
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: org-policy-skipnetwork
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      variable "orgid" {
+      }
+      
+      resource "google_organization_policy" "skip_network" {
+        org_id     = var.orgid
+        constraint = "compute.skipDefaultNetworkCreation"
+
+        boolean_policy {
+          enforced = true
+        }
+      }
+    vars:
+      - key: orgid
+        value: "555271503501"

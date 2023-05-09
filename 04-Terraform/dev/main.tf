@@ -26,7 +26,7 @@ module "vpc" {
 
 
 
-module "cluster-1" {
+module "temp-cluster-bhavi" {
   source     = "../modules/gke-cluster-standard"
   project_id = var.project_id
   name       = var.cluster_name
